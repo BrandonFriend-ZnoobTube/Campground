@@ -1,0 +1,35 @@
+<% layout('layouts/boilerplate')%>
+<div class="row">
+  <h1 class="text-center">New Campground</h1>
+  <div class="col-6 offset-3">
+    <form action="/camp/create" method="POST" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label class="form-label" for="name">Name</label>
+        <input class="form-control" type="text" name="campground[title]" id="name" placeholder="enter name" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="location">Location</label>
+        <input class="form-control" type="text" name="campground[location]" id="location" placeholder="enter location" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="image">Image URL</label>
+        <input class="form-control" type="text" name="campground[image]" id="image" placeholder="enter image url" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="price">Campground Price</label>
+        <div class="input-group">
+          <span class="input-group-text" id="price-label">$</span>
+          <input type="text" class="form-control" id="price" name="campground[price]" placeholder="0.00" aria-label="price amount" aria-describedby="price" required>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="description">Description</label>
+        <textarea class="form-control" name="campground[description]" id="description" placeholder="enter description" required></textarea>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-success" type="submit">Add Campground</button>
+        <a href="/camp/list" class="btn btn-danger">All Campgrounds</a>
+      </div>
+    </form>
+  </div>
+</div>
