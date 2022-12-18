@@ -1,7 +1,7 @@
 const express = require('express');
 const TryAsync = require('../utils/TryAsync');
 const Campground = require('../models/campground');
-const { isLoggedIn, validateCampground } = require('../middleware');
+const { isLoggedIn, validateCampground, validateAuthor } = require('../middleware');
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.get('/list', TryAsync(async (req, res) => {
 }));
 
 router.get('/show/:id', TryAsync(async (req, res) => {
-  const camp = await Campground.findById(req.params.id).populate('reviews');
+  const camp = await Campground.findById(req.params.id).populate('reviews').populate('author');
   if (!camp) {
     req.flash('error', 'Campground has moved or been deleted');
     return res.redirect('/camp');
@@ -19,7 +19,7 @@ router.get('/show/:id', TryAsync(async (req, res) => {
   res.render('camp/show', { camp });
 }));
 
-router.get('/:id/edit', isLoggedIn, TryAsync(async (req, res) => {
+router.get('/:id/edit', isLoggedIn, validateAuthor, TryAsync(async (req, res) => {
   const camp = await Campground.findById(req.params.id);
   res.render('camp/edit', { camp });
 }));
@@ -30,19 +30,20 @@ router.get('/new', isLoggedIn, (req, res) => {
 
 router.post('/create', isLoggedIn, validateCampground, TryAsync(async (req, res) => {
   const camp = new Campground(req.body.campground);
+  camp.author = req.user._id;
   await camp.save();
   req.flash('success', 'Successfully made a new campground');
   res.redirect(`/camp/show/${ camp._id }`);
 }));
 
-router.put('/:id', isLoggedIn, validateCampground, TryAsync(async (req, res) => {
+router.put('/:id', isLoggedIn, validateCampground, validateAuthor, TryAsync(async (req, res) => {
   const { id } = req.params;
   const camp = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
   req.flash('success', 'Successfully updated campground');
   res.redirect(`/camp/show/${ camp._id }`);
 }));
 
-router.delete('/delete/:id', isLoggedIn, TryAsync(async (req, res) => {
+router.delete('/delete/:id', isLoggedIn, validateAuthor, TryAsync(async (req, res) => {
   const { id } = req.params;
   await Campground.findByIdAndDelete(id);
   req.flash('success', 'Successfully deleted campground');

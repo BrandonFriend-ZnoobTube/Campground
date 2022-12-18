@@ -1,5 +1,6 @@
 const { campgroundSchema, reviewSchema } = require('./schemas');
 const ExpressError = require('./utils/ExpressError');
+const Campground = require('./models/campground');
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -31,3 +32,13 @@ module.exports.validateReview = (req, res, next) => {
     next();
   }
 };
+
+module.exports.validateAuthor = async (req, res, next) => {
+  const { id } = req.params;
+  const camp = await Campground.findById(id);
+  if (!camp.author.equals(req.user._id)) {
+    req.flash('error', 'You are not the owner of this camp');
+    return res.redirect(`/camp/show/${ id }`);
+  }
+  next();
+}
