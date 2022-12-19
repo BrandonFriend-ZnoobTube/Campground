@@ -14,10 +14,9 @@
         <input class="form-control" type="text" name="campground[location]" id="location" value="<%= camp.location %>"
                placeholder="enter location" required>
       </div>
-      <div class="mb-3">
-        <label class="form-label" for="image">Image URL</label>
-        <input class="form-control" type="text" name="campground[image]" id="image" value="<%= camp.image %>"
-               placeholder="enter image url" required>
+      <div class="input-group mb-3 custom-file">
+        <label class="input-group-text custom-file-label" for="imageFile">Upload Images</label>
+        <input type="file" class="form-control" id="imageFile" name="image" multiple>
       </div>
       <div class="mb-3">
         <label class="form-label" for="price">Campground Price</label>
@@ -29,7 +28,7 @@
       </div>
       <div class="mb-3">
         <label class="form-label" for="description">Description</label>
-        <textarea class="form-control" type="text" name="campground[description]" id="description"
+        <textarea class="form-control" name="campground[description]" id="description"
                   placeholder="enter description" required><%= camp.description %></textarea>
       </div>
       <div class="mb-3">

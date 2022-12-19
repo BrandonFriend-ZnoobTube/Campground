@@ -17,7 +17,7 @@ router.route('/new')
 
 router.route('/:id')
   .get(TryAsync(campController.getCamp))
-  .put(isLoggedIn, validateCampground, validateCampAuthor, TryAsync(campController.putCampEdit))
+  .put(isLoggedIn, validateCampAuthor, upload.array('image') ,validateCampground, TryAsync(campController.putCampEdit))
   .delete(isLoggedIn, validateCampAuthor, TryAsync(campController.deleteCamp));
 
 module.exports = router;
