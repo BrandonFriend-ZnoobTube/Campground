@@ -5,7 +5,7 @@ const { isLoggedIn, validateCampground, validateCampAuthor } = require('../middl
 const campController = require('../controllers/campgrounds');
 const { storage } = require('../cloudinary');
 
-const upload = multer(storage);
+const upload = multer({ storage });
 const router = express.Router();
 
 router.get('/list', TryAsync(campController.index));

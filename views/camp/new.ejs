@@ -2,7 +2,7 @@
 <div class="row">
   <h1 class="text-center">New Campground</h1>
   <div class="col-6 offset-3">
-    <form action="/camp/new" method="POST" class="needs-validation" novalidate>
+    <form action="/camp/new" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
       <div class="mb-3">
         <label class="form-label" for="name">Name</label>
         <input class="form-control" type="text" name="campground[title]" id="name" placeholder="enter name" required>

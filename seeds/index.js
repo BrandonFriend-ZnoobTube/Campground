@@ -23,7 +23,7 @@ const seedDB = async () => {
       author: '639df41a0b4fbb0fc6b01a1a',
       location: `${ cities[random1000].city }, ${ cities[random1000].state }`,
       title: `${ sample(descriptors) } ${ sample(places) }`,
-      image: 'https://source.unsplash.com/collection/483251',
+      // image: 'https://source.unsplash.com/collection/483251',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
         'Ut faucibus pulvinar elementum integer enim neque volutpat. Venenatis lectus magna fringilla urna porttitor rhoncus dolor. ' +
         'Donec pretium vulputate sapien nec sagittis aliquam malesuada. Aliquam sem fringilla ut morbi.',
