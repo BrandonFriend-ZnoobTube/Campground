@@ -42,7 +42,7 @@ module.exports.validateCampAuthor = async (req, res, next) => {
     return res.redirect(`/camp/show/${ id }`);
   }
   next();
-}
+};
 
 module.exports.validateReviewAuthor = async (req, res, next) => {
   const { id, reviewId } = req.params;
@@ -52,4 +52,4 @@ module.exports.validateReviewAuthor = async (req, res, next) => {
     return res.redirect(`/camp/show/${ id }`);
   }
   next();
-}
+};

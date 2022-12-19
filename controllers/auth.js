@@ -2,11 +2,11 @@ const User = require('../models/user');
 
 module.exports.getRegister = (req, res) => {
   res.render('auth/register');
-}
+};
 
 module.exports.getLogin = (req, res) => {
   res.render('auth/login');
-}
+};
 
 module.exports.postRegister = async (req, res, next) => {
   try {
@@ -22,17 +22,17 @@ module.exports.postRegister = async (req, res, next) => {
     req.flash('error', e.message);
     res.redirect('/auth/register');
   }
-}
+};
 
 module.exports.postLogin = (req, res) => {
   req.flash('success', 'Login Successful');
   const redirectUrl = req.session.returnTo || '/camp/list';
   delete req.session.returnTo;
   res.redirect(redirectUrl);
-}
+};
 
 module.exports.getLogout = (req, res) => {
   req.logout();
   req.flash('success', 'Successfully logged out');
   res.redirect('/camp/list');
-}
+};

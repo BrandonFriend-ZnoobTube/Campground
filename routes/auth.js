@@ -8,14 +8,14 @@ const router = express.Router();
 
 router.route('/register')
   .get(authController.getRegister)
-  .post(TryAsync(authController.postRegister))
+  .post(TryAsync(authController.postRegister));
 
 router.route('/login')
   .get(authController.getLogin)
   .post(passport.authenticate('local', {
     failureFlash: true,
     failureRedirect: '/auth/login'
-  }), authController.postLogin)
+  }), authController.postLogin);
 
 router.get('/logout', authController.getLogout);
 
