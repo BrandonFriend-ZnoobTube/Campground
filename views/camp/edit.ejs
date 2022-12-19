@@ -5,11 +5,6 @@
     <form action="/camp/<%= camp._id %>?_method=PUT" method="POST" class="needs-validation"
           enctype="multipart/form-data" novalidate>
       <div class="mb-3">
-        <label class="form-label" for="name">Name</label>
-        <input class="form-control" type="text" name="campground[title]" id="name" value="<%= camp.title %>"
-               placeholder="enter name" required>
-      </div>
-      <div class="mb-3">
         <label class="form-label" for="location">Location</label>
         <input class="form-control" type="text" name="campground[location]" id="location" value="<%= camp.location %>"
                placeholder="enter location" required>
@@ -30,6 +25,24 @@
         <label class="form-label" for="description">Description</label>
         <textarea class="form-control" name="campground[description]" id="description"
                   placeholder="enter description" required><%= camp.description %></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="name">Name</label>
+        <input class="form-control" type="text" name="campground[title]" id="name" value="<%= camp.title %>"
+               placeholder="enter name" required>
+      </div>
+      <div class="mb-3">
+        <% if (camp.image.length) { %>
+          <% camp.image.forEach(function(img, i) { %>
+            <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="">
+            <div class="form-check-inline">
+              <input type="checkbox" id="image-<%= i %>" name="deleteImages[]" value="<%= img.filename %>">
+            </div>
+            <label for="image-<%= i %>">Delete?</label>
+          <% }) %>
+        <% } else { %>
+          <img src="/img/placeholder.jpg" class="img-thumbnail" alt="">
+        <% } %>
       </div>
       <div class="mb-3">
         <button class="btn btn-info" type="submit">Update Campground</button>
