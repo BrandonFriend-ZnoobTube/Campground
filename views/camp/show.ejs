@@ -1,14 +1,20 @@
 <% layout('layouts/boilerplate'); %>
 <link rel="stylesheet" href="/css/starability.css">
 
+<script>
+  const mapToken = '<%- process.env.MAPBOX_TOKEN %>';
+  const campground = <%- JSON.stringify(camp) %>;
+</script>
+
 <div class="row">
   <div class="col-6">
+    <div id='map' style='width: 400px; height: 300px;'></div>
     <% if (camp.image.length) { %>
       <div id="campImageControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <% camp.image.forEach((img, i) => { %>
             <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
-              <img src="<%= img.url %>" class="d-block w-100" alt="">
+              <img src="<%= img.url %>" class="d-block w-75" alt="">
             </div>
           <% }) %>
         </div>
@@ -100,3 +106,5 @@
     <% } %>
   </div>
 </div>
+
+<script src="/js/showMap.js"></script>
