@@ -31,8 +31,12 @@ module.exports.postLogin = (req, res) => {
   res.redirect(redirectUrl);
 };
 
-module.exports.getLogout = (req, res) => {
-  req.logout();
-  req.flash('success', 'Successfully logged out');
-  res.redirect('/camp/list');
+module.exports.getLogout = (req, res, next) => {
+  req.logout(err => {
+    if (err) {
+      return next(err);
+    }
+    req.flash('success', 'Successfully logged out');
+    res.redirect('/camp/list');
+  });
 };

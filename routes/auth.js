@@ -17,6 +17,6 @@ router.route('/login')
     failureRedirect: '/auth/login'
   }), authController.postLogin);
 
-router.get('/logout', authController.getLogout);
+router.post('/logout', authController.getLogout);
 
 module.exports = router;
